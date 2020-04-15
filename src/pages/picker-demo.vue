@@ -33,6 +33,21 @@
         <picker mode="dateTime" :value="pickerIndex7" data-key="pickerIndex7" v-on:change="pickerChangeFun">
           <div class="picker-view1">{{pickerIndex7||'请选择'}}</div>
         </picker>
+        <div class="app-remark-view">
+          <div>参数列表：</div>
+          <div>1.mode</div>
+          <div>有效值为：date（日期）、dateTime（日期时间）、time（时间）、selector（单列）、multiSelector（多列）</div>
+          <div>2.rang</div>
+          <div>当mode的值为selector（单列）、multiSelector（多列）有效，用于指定滚动列表</div>
+          <div>3.rangKey（rang-key="name"）</div>
+          <div>当rang的元素值类型为对象时，用以显示的key值（参考微信小程序）</div>
+          <div>4.value</div>
+          <div>用于向选择器指定初始值（参考微信小程序）</div>
+          <div>5.start</div>
+          <div>当mode的值为date（日期）、dateTime（日期时间）时，用来指定最小日期</div>
+          <div>5.end</div>
+          <div>当mode的值为date（日期）、dateTime（日期时间）时，用来指定最大日期</div>
+        </div>
         <div class="app-media-bottom-view"></div>
       </scroll-view>
     </div>
