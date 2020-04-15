@@ -10,6 +10,16 @@
         <choose-image @change="chooseImageFun">
           <div class="app-button">选择图片</div>
         </choose-image>
+        <div class="app-remark-view">
+          <div>参数列表：</div>
+          <div>1.max</div>
+          <div>number类型，用以指定图片的大小，默认值3</div>
+          <div>2.scale</div>
+          <div>导出basic64时的缩放比例，默认为1</div>
+          <div>3.format</div>
+          <div>导出的图片格式，默认为png</div>
+        </div>
+        <div class="app-media-bottom-view"></div>
       </scroll-view>
     </div>
   </div>
