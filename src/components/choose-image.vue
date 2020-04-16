@@ -21,16 +21,12 @@
         default: 1
       },format: {
         type: String, //图片的缩放比例
-        default: "png",
-        validator (value){
-          return ['png', 'jpg', 'jpeg'].indexOf(value) !== -1
-        }
+        default: "png"
       }
     },
     methods: {
       slotButtonClickFun() {
         this.$refs.imageButton.click();
-        //console.log(this);
       },
       imageChooseFun(event) {
         let max = this.max;
@@ -74,19 +70,13 @@
         oImage.onload = function(even) {
           let w = this.width,
           	h = this.height;
-          let quality = that.scale;
+          let scale = that.scale;
           let canvas = document.createElement('canvas');
           let ctx = canvas.getContext('2d');
-          let anw = document.createAttribute("width");
-          anw.nodeValue = w;
-          let anh = document.createAttribute("height");
-          anh.nodeValue = h;
-          canvas.setAttributeNode(anw);
-          canvas.setAttributeNode(anh);
-          ctx.drawImage(this, 0, 0, w, h);
+          ctx.drawImage(this, 0, 0, w, h,0,0,w*scale,h*scale);
           return that.callBackFun({
             type: 0,
-            value: canvas.toDataURL('image/' + that.format, quality),
+            value: canvas.toDataURL('image/' + that.format),
             errorMsg: ""
           });
         }
