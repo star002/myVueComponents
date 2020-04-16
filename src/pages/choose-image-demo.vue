@@ -15,7 +15,7 @@
           <div>1.max</div>
           <div>number类型，用以指定图片的大小，默认值3</div>
           <div>2.scale</div>
-          <div>导出basic64时的缩放比例，默认为1</div>
+          <div>canvas在绘制图片时，宽高的缩放，默认为1</div>
           <div>3.format</div>
           <div>导出的图片格式，默认为png</div>
         </div>
