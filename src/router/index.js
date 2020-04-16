@@ -4,6 +4,7 @@ import MinePage from '@/pages/mine'
 import pickerDemoPage from '@/pages/picker-demo'
 import chooseImageDemoPage from '@/pages/choose-image-demo'
 import cookieDemoPage from '@/pages/cookie-demo'
+import cloneObjDemoPage from '@/pages/clone-obj-demo'
 
 Vue.use(Router)
 
@@ -29,5 +30,9 @@ export default new Router({
     path: '/cookie',
     name: 'cookie',
     component: cookieDemoPage
+  }, {
+    path: '/clone-obj',
+    name: 'clone-obj',
+    component: cloneObjDemoPage
   }]
 })
