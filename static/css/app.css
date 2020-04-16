@@ -331,6 +331,13 @@ html {
 	padding: 0 0 constant(safe-area-inset-bottom) 0;
   box-sizing:border-box;
 }
+.app-remark-view{
+  width: 100%;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  color: #999999;
+  font-size: 12px;
+}
 .app-media-bottom-view {
 	height: 32px;
 	width: 100%;
