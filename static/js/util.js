@@ -21,16 +21,20 @@ var util = (function(){
   	return cookies;
   }
   let setCookieFun = function(key, value){
+    //设置cookie
   	document.cookie = encodeURI(encodeURI(key))+"="+encodeURI(encodeURI(value))+"; expires="+new Date()+"; path=/";
   }
   let getCookieFun = function(key){
+    //获取cookie
   	let cookies = getAllCookieFun();
   	return cookies[key] || "";
   }
   let removeCookieFun = function(key){
+    //删除cookie
     document.cookie = encodeURI(encodeURI(key))+"=; expires="+new Date(1970,01,01)+"; path=/";
   }
   let clearCookieFun = function(){
+    //清除所有的cookie
     let cookies = getAllCookieFun();
     for(let key in cookies){
       removeCookieFun(key);
