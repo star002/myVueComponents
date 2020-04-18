@@ -18,10 +18,6 @@
           name: "cookie",
           introduce: "设置、获取、删除、清空cookie",
           path: "/cookie"
-        },{
-          name: "clone-obj",
-          introduce: "深度拷贝数组、对象",
-          path: "/clone-obj"
         }]
       }
     },methods:{
