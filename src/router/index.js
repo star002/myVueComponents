@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import MinePage from '@/views/mine'
 import pickerDemoPage from '@/views/picker-demo'
 import chooseImageDemoPage from '@/views/choose-image-demo'
+import swiperDemoPage from '@/views/swiper-demo'
 import cookieDemoPage from '@/views/cookie-demo'
 
 Vue.use(VueRouter)
@@ -23,6 +24,10 @@ Vue.use(VueRouter)
     path: '/choose-image',
     name: 'choose-image',
     component: chooseImageDemoPage
+  }, {
+    path: '/swiper',
+    name: 'swiper',
+    component: swiperDemoPage
   }, {
     path: '/cookie',
     name: 'cookie',

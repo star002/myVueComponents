@@ -48,7 +48,7 @@
       }
     },
     watch: {
-      activeIndex (newValue, oldValue) {
+      activeIndex (newValue) {
         this.myActiveIndex = newValue;
       }
     }

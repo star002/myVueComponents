@@ -22,6 +22,10 @@
           name: "choose-image",
           introduce: "图片选择",
           path: "/choose-image"
+        },{
+          name: "swiper",
+          introduce: "swiper",
+          path: "/swiper"
         }]
       }
     },methods:{
