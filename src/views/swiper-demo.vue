@@ -10,7 +10,7 @@
 						<div class="app-remark-view" style="color: #ffffff;">
 							<div>{{item}}参数列表：</div>
 							<div>1.value</div>
-							<div>swiper的初始值。</div>
+							<div>swiper的初始值，默认值0。</div>
 							<div>2.autoPlay</div>
 							<div>是否自动播放，默认为true。</div>
 							<div>3.interval（ms）</div>
