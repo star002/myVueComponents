@@ -1,6 +1,6 @@
 <template>
 	<div class="swiper" _data-type="component">
-		<div class="swiper-view" :style="{width:elWidth*swiperItemLength*3+'px',transition:'transform '+animationTime+'ms linear',transform: 'translate3d('+transformX+'px,0,0)'}" @touchstart.stop="touchStartFun" @touchmove.stop="touchMoveFun" @touchend.stop="touchEndFun">
+		<div class="swiper-view" :style="{width:elWidth*swiperItemLength*3+'px',transition:'transform '+animationTime+'ms linear',transform: 'translate3d('+transformX+'px,0,0)'}" @mousedown.stop="mouseDownFun" @mousemove.stop="mouseMoveFun" @touchstart.stop="touchStartFun" @touchmove.stop="touchMoveFun" @touchend.stop="touchEndFun">
 			<div class="slot-view" :style="{width:elWidth*swiperItemLength+'px'}">
 				<slot></slot>
 			</div>
@@ -24,6 +24,10 @@
 			value:{//
 				type: Number,
 				default: 0
+			},
+			loop:{//循环开关
+				type: Boolean,
+				default: true
 			},
 			autoPlay:{//自动切换开关
 				type: Boolean,
@@ -54,6 +58,7 @@
 				elHeight: 0,
 				swiperItemLength: 0,
 				transformX: 0,
+				mouseDown: false,
 				touchObj: {
 					time: 0,
 					touchX: 0,
@@ -72,6 +77,7 @@
 				})
 				this.swiperItemLength = swiperItemLength;
 				callBack && callBack(this.elWidth, this.elHeight);
+				this.initFun();
 			},
 			resizeFun() {
 				let that = this;
@@ -81,31 +87,52 @@
 					item.resizeFun && item.resizeFun(that.elWidth, that.elHeight);
 				})
 				that.initFun();
+			},mouseDownFun (event){
+				this.startFun(event.clientX, event.clientY);
 			},
 			touchStartFun(event) {
-				if (this.animationTime) {
+				this.startFun(event.touches[0].screenX, event.touches[0].screenY);
+			},startFun (screenX, screenY){
+				if (this.animationTime || this.mouseDown) {
 					return false;
 				}
 				clearInterval(this.timer);
 				this.touchObj.time = new Date().getTime();
-				this.touchObj.touchX = event.touches[0].screenX;
-				this.touchObj.touchY = event.touches[0].screenY;
-				this.touchObj.screenX = event.touches[0].screenX;
+				this.touchObj.touchX = screenX;
+				this.touchObj.touchY = screenY;
+				this.touchObj.screenX = screenX;
+				this.mouseDown = true;
+			},mouseMoveFun (event){
+				this.moveFun(event.clientX);
 			},
 			touchMoveFun(event) {
-				let screenX = event.touches[0].screenX;
-				if (this.animationTime) {
+				this.moveFun(event.touches[0].screenX);
+			},moveFun(screenX){
+				if (this.animationTime || this.mouseDown == false) {
+					return false;
+				}
+				if(this.loop == false && screenX > this.touchObj.screenX && this.activeValue == 0){
+					this.touchObj.screenX = screenX;
 					return false;
 				}
 				this.transformX += screenX - this.touchObj.screenX;
 				this.touchObj.screenX = screenX;
 				this.transformXFun();
+			},mouseUpFun(){
+				console.log("mouseUpFun")
+				this.endFun();
 			},
 			touchEndFun() {
+				this.endFun();
+			},endFun(){
 				let moveX = this.touchObj.touchX - this.touchObj.screenX;
 				let moveAbs = Math.abs(moveX % this.elWidth);
 				let yuShu = Math.abs(this.transformX % this.elWidth), linJieZhi = this.elWidth / 3;
 				let computedX = 0, animationTime = 200;
+				this.mouseDown = false;
+				if(this.loop == false && moveX < 0 && this.activeValue == 0){
+					return false;
+				}
 				if(moveX>0&&moveAbs<linJieZhi){
 					computedX = yuShu;
 				}else if(moveX>0&&moveAbs>=linJieZhi){
@@ -169,7 +196,6 @@
 				let activeValue = Math.abs(this.transformX / this.elWidth)%this.swiperItemLength;
 				if(activeValue!=this.activeValue){
 					this.activeValue = activeValue;
-					console.log(activeValue);
 					this.$emit("change", {
 						dataset: this.$el.dataset,
 						detail: {
@@ -182,6 +208,8 @@
 		mounted() {
 			let that = this;
 			that.resizeFun();
+			document.addEventListener("mouseup",this.mouseUpFun,false);
+			document.addEventListener("dragend",this.mouseUpFun,false);
 			window.addEventListener("resize", function() {
 				that.resizeFun();
 			}, false);
