@@ -26,6 +26,10 @@
           name: "swiper",
           introduce: "swiper",
           path: "/swiper"
+        },{
+          name: "cascader",
+          introduce: "级联选择器",
+          path: "/cascader"
         }]
       }
     },methods:{

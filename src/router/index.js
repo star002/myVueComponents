@@ -5,6 +5,7 @@ import pickerDemoPage from '@/views/picker-demo'
 import chooseImageDemoPage from '@/views/choose-image-demo'
 import swiperDemoPage from '@/views/swiper-demo'
 import cookieDemoPage from '@/views/cookie-demo'
+import cascaderDemoPage from '@/views/cascader-demo'
 
 Vue.use(VueRouter)
 
@@ -32,6 +33,10 @@ Vue.use(VueRouter)
     path: '/cookie',
     name: 'cookie',
     component: cookieDemoPage
+  }, {
+    path: '/cascader',
+    name: 'cascader',
+    component: cascaderDemoPage
   }]
 
 const router = new VueRouter({
