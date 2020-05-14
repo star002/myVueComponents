@@ -25,7 +25,7 @@
 				<template v-if="item.children&&item.children.length>0">
 					<!-- 目录 -->
 					<div v-bind:class="{item: true, checked: selectValue[index]}" v-bind:key="item[rangKey]+'1'" v-on:click="cascaderItemClickFun(index)">
-						<div class="text-view">{{item[rangKey]}}</div>
+						<div class="text-view">{{item[rangKey]}} {{selectValue[index]}}</div>
 						<div class="arrow-right" v-bind:style="{transform: 'rotateZ('+(showIndex==index?'135deg':'45deg')+')'}"></div>
 					</div>
 				</template>
@@ -100,7 +100,6 @@
 					} else if (Boolean(selectValue[index]) != toggle) {
 						that.fun2(index, toggle);
 					}
-
 				})
 			},
 			fun2(index, toggle) {
@@ -213,7 +212,7 @@
 				this.selectValue = selectValue;
 				this.initSelectValue = null;
 				this.initSelectValue = initSelectValue;
-				if(JSON.stringify(selectValue)!="{}"){
+				if(JSON.stringify(selectValue)!="{}" && this.multiple){
 					this.checkboxChangeFun();
 				}
 			}
