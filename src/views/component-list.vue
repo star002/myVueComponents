@@ -30,6 +30,10 @@
           name: "cascader",
           introduce: "级联选择器",
           path: "/cascader"
+        },{
+          name: "checkbox",
+          introduce: "复选框",
+          path: "/checkbox"
         }]
       }
     },methods:{
