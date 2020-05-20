@@ -6,7 +6,8 @@ import chooseImageDemoPage from '@/views/choose-image-demo'
 import swiperDemoPage from '@/views/swiper-demo'
 import cookieDemoPage from '@/views/cookie-demo'
 import cascaderDemoPage from '@/views/cascader-demo'
-
+import checkboxDemoPage from '@/views/checkbox-demo'
+//checkbox-demo
 Vue.use(VueRouter)
 
   const routes = [{
@@ -37,6 +38,10 @@ Vue.use(VueRouter)
     path: '/cascader',
     name: 'cascader',
     component: cascaderDemoPage
+  }, {
+    path: '/checkbox',
+    name: 'checkbox',
+    component: checkboxDemoPage
   }]
 
 const router = new VueRouter({
