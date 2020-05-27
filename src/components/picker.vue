@@ -13,7 +13,7 @@
 				<div class="picker-section">
 					<!-- 单列选择器 -->
 					<div class="picker-item" v-if="mode=='selector'" @touchstart.stop.prevent="touchStartFun($event, 0, transFormList[0])"
-					 @touchmove.stop.prevent="touchMoveFun($event, 0, transFormList[0])" @touchend.stop.prevent="touchEndFun($event, 0, transFormList[0])">
+					@touchmove.stop.prevent="touchMoveFun($event, 0, transFormList[0])" @touchend.stop.prevent="touchEndFun($event, 0, transFormList[0])">
 						<div class="line top" v-if='rang.length>0'></div>
 						<div class="line bottom" v-if='rang.length>0'></div>
 						<div class="transform-view" v-bind:style="{transform: 'translate3d(0,'+transFormList[0]+'px,0)'}">
@@ -24,7 +24,7 @@
 								<div class="item" v-for="(item, index) in rang" v-bind:key="index">{{item[rangKey]}}</div>
 							</template>
 							<template v-if="!rangKey">
-								<div class="item" v-for="(item, index) in rang" v-if="!rangKey" v-bind:key="index">{{item}}</div>
+								<div class="item" v-for="(item, index) in rang" v-bind:key="index">{{item}}</div>
 							</template>
 							<div class="item"></div>
 							<div class="item"></div>
@@ -32,8 +32,8 @@
 						</div>
 					</div>
 					<!-- 多列选择器 -->
-					<template v-for="(pItem,pIndex) in rang" v-if="mode=='multiSelector'&&pIndex<3">
-						<div class="picker-item" :key="pIndex" @touchstart.stop.prevent="touchStartFun($event, pIndex, transFormList[pIndex])"
+					<template v-for="(pItem,pIndex) in rang">
+						<div class="picker-item" v-if="mode=='multiSelector'&&pIndex<3" :key="pIndex" @touchstart.stop.prevent="touchStartFun($event, pIndex, transFormList[pIndex])"
 						 @touchmove.stop.prevent="touchMoveFun($event, pIndex, transFormList[pIndex])" @touchend.stop.prevent="touchEndFun($event, pIndex, transFormList[pIndex])">
 							<div class="line top" v-if='rang[pIndex].length>0'></div>
 							<div class="line bottom" v-if='rang[pIndex].length>0'></div>
@@ -45,7 +45,7 @@
 									<div class="item" v-for="(item, index) in rang[pIndex]" v-bind:key="index">{{item[rangKey]}}</div>
 								</template>
 								<template v-if="!rangKey">
-									<div class="item" v-for="(item, index) in rang[pIndex]" v-if="!rangKey" v-bind:key="index">{{item}}</div>
+									<div class="item" v-for="(item, index) in rang[pIndex]" v-bind:key="index">{{item}}</div>
 								</template>
 								<div class="item"></div>
 								<div class="item"></div>
@@ -54,9 +54,9 @@
 						</div>
 					</template>
 					<!-- 日期选择器、日期时间选择器、时间选择器 -->
-					<template v-for="(pItem,pIndex) in myDateRang" v-if="mode=='date'||mode=='dateTime'||mode=='time'">
-						<div class="picker-item" :key="pIndex" @touchstart.stop.prevent="touchStartFun($event, pIndex, transFormList[pIndex])"
-						 @touchmove.stop.prevent="touchMoveFun($event, pIndex, transFormList[pIndex])" @touchend.stop.prevent="touchEndFun($event, pIndex, transFormList[pIndex])">
+					<template v-for="(pItem,pIndex) in myDateRang">
+						<div class="picker-item" :key="pIndex" v-if="mode=='date'||mode=='dateTime'||mode=='time'" @touchstart.stop.prevent="touchStartFun($event, pIndex, transFormList[pIndex])"
+						@touchmove.stop.prevent="touchMoveFun($event, pIndex, transFormList[pIndex])" @touchend.stop.prevent="touchEndFun($event, pIndex, transFormList[pIndex])">
 							<div class="line top" v-if='myDateRang[pIndex].length>0'></div>
 							<div class="line bottom" v-if='myDateRang[pIndex].length>0'></div>
 							<div class="transform-view" v-bind:style="{transform: 'translate3d(0,'+transFormList[pIndex]+'px,0)'}">
@@ -144,7 +144,7 @@
 			pickerDisplayChangeFun(value) {
 				this.pickerDisplayValue = value;
 			},
-			touchStartFun(event, selectotIndex, transformY) {
+			touchStartFun(event, selectotIndex) {
 				if (this.timer) {
 					return false;
 				}
@@ -154,7 +154,7 @@
 				this.touchObj.screenY = event.touches[0].screenY;
 				this.touchObj.touchIndex = selectotIndex;
 			},
-			touchMoveFun(event, selectotIndex, transformY) {
+			touchMoveFun(event) {
 				let touchIndex = this.touchObj.touchIndex,
 					screenY = event.touches[0].screenY;
 				if (this.timer) {
@@ -166,7 +166,7 @@
 				this.transFormList.unshift();
 				this.transformYFun(touchIndex);
 			},
-			touchEndFun(event, selectotIndex, transformY) {
+			touchEndFun() {
 				let endTime = new Date().getTime() - this.touchObj.time,
 					moveY = this.touchObj.touchY - this.touchObj.screenY;
 				if (this.timer) {
@@ -215,7 +215,7 @@
 					this.transformYFun(this.touchObj.touchIndex);
 				}, 30)
 			},
-			transformEndFun(direction) {
+			transformEndFun() {
 				let swiperItemHeight = this.swiperItemHeight;
 				let yuShu = parseInt(this.transFormList[this.touchObj.touchIndex] % swiperItemHeight),
 					speet = -1;
@@ -348,13 +348,13 @@
 						monthList = this.getListFun(1, 13),
 						dayList = this.getListFun(1, 31),
 						dayTransFormY = 0;
-					monthList.forEach((item, index) => {
+					monthList.forEach((item) => {
 						let month = Number(item);
 						if (month < valueMonth) {
 							monthTransFormY -= swiperItemHeight;
 						}
 					})
-					dayList.forEach((item, index) => {
+					dayList.forEach((item) => {
 						let day = Number(item);
 						if (day < valueDay) {
 							dayTransFormY -= swiperItemHeight;
@@ -387,13 +387,13 @@
 						monthList = this.getListFun(1, 13),
 						dayList = this.getListFun(1, 31),
 						dayTransFormY = 0;
-					monthList.forEach((item, index) => {
+					monthList.forEach((item) => {
 						let month = Number(item);
 						if (month < valueMonth) {
 							monthTransFormY -= swiperItemHeight;
 						}
 					})
-					dayList.forEach((item, index) => {
+					dayList.forEach((item) => {
 						let day = Number(item);
 						if (day < valueDay) {
 							dayTransFormY -= swiperItemHeight;
@@ -499,7 +499,7 @@
 			rang() {
 				this.initFun();
 			},
-			mode(newValue) {
+			mode() {
 				this.initFun();
 			},
 			value() {

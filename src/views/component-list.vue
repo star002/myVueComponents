@@ -34,6 +34,10 @@
           name: "checkbox",
           introduce: "复选框",
           path: "/checkbox"
+        },{
+          name: "close-icon",
+          introduce: "关闭按钮",
+          path: "/close-icon"
         }]
       }
     },methods:{

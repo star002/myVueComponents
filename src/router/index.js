@@ -7,7 +7,8 @@ import swiperDemoPage from '@/views/swiper-demo'
 import cookieDemoPage from '@/views/cookie-demo'
 import cascaderDemoPage from '@/views/cascader-demo'
 import checkboxDemoPage from '@/views/checkbox-demo'
-//checkbox-demo
+import closeIconDemoPage from '@/views/close-icon-demo'
+//close-demo
 Vue.use(VueRouter)
 
   const routes = [{
@@ -42,10 +43,13 @@ Vue.use(VueRouter)
     path: '/checkbox',
     name: 'checkbox',
     component: checkboxDemoPage
+  }, {
+    path: '/close-icon',
+    name: 'close-icon',
+    component: closeIconDemoPage
   }]
 
 const router = new VueRouter({
-  mode: 'history',
   base: process.env.BASE_URL,
   routes
 })
