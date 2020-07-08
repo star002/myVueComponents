@@ -45,12 +45,6 @@
       tabBarChangeFun (e){
         this.tabbarIndex = e.detail.value;
       }
-    },mounted() {
-  //   	let obj1 = {
-		// 	id: "001",
-		// 	name: "名称哟"
-		// };
-		//let obj2 = obj1.aaaa.fun1();
     }
   }
 </script>

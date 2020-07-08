@@ -34,7 +34,7 @@
 					<!-- 多列选择器 -->
 					<template v-for="(pItem,pIndex) in rang">
 						<div class="picker-item" v-if="mode=='multiSelector'&&pIndex<3" :key="pIndex" @touchstart.stop.prevent="touchStartFun($event, pIndex, transFormList[pIndex])"
-						 @touchmove.stop.prevent="touchMoveFun($event, pIndex, transFormList[pIndex])" @touchend.stop.prevent="touchEndFun($event, pIndex, transFormList[pIndex])">
+						@touchmove.stop.prevent="touchMoveFun($event, pIndex, transFormList[pIndex])" @touchend.stop.prevent="touchEndFun($event, pIndex, transFormList[pIndex])">
 							<div class="line top" v-if='rang[pIndex].length>0'></div>
 							<div class="line bottom" v-if='rang[pIndex].length>0'></div>
 							<div class="transform-view" v-bind:style="{transform: 'translate3d(0,'+transFormList[pIndex]+'px,0)'}">
@@ -173,7 +173,7 @@
 					return false;
 				}
 				if (endTime >= 300) {
-					return this.transformEndFun(endTime);
+					return this.transformEndFun(true);
 				}
 				endTime = parseInt(endTime / 15);
 				let speet = parseInt(moveY / endTime);
@@ -215,12 +215,15 @@
 					this.transformYFun(this.touchObj.touchIndex);
 				}, 30)
 			},
-			transformEndFun() {
+			transformEndFun(toggle) {
 				let swiperItemHeight = this.swiperItemHeight;
 				let yuShu = parseInt(this.transFormList[this.touchObj.touchIndex] % swiperItemHeight),
 					speet = -1;
-				if (yuShu <= -16) {
+				if (yuShu <= -12) {
 					speet = 1;
+				}
+				if(toggle && yuShu == 0){
+					speet = 0;
 				}
 				this.timer = setInterval(() => {
 					this.transFormList[this.touchObj.touchIndex] -= speet;
